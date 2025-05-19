@@ -1,6 +1,6 @@
 #import "@preview/polylux:0.4.0": *
 
-#let HANDOUT_MODE = false
+#let HANDOUT_MODE = true
 #enable-handout-mode(HANDOUT_MODE)
 
 #let SMALL_FONT = 14pt
@@ -893,15 +893,15 @@
   )
 ]
 
-// #if HANDOUT_MODE  == false [
-#sl(footer: false, fill: TEXT_COLOR)[
-  #align(center, image("assets/xmm-ngc-4151.png", width: 100%))
+#if HANDOUT_MODE  == false [
+  #sl(footer: false, fill: TEXT_COLOR)[
+    #align(center, image("assets/xmm-ngc-4151.png", width: 100%))
 
-  #place(center + horizon)[
-    #uncover("2-")[#image("assets/eht-m87-image.jpg")]
+    #place(center + horizon)[
+      #uncover("2-")[#image("assets/eht-m87-image.jpg")]
+    ]
   ]
 ]
-// ]
 
 #slide[
   #show link: l => text(fill: blue.lighten(40%), l)
