@@ -1,8 +1,9 @@
 #import "@preview/polylux:0.4.0": *
 
-#let HANDOUT_MODE = true
+#let HANDOUT_MODE = false
 #enable-handout-mode(HANDOUT_MODE)
 
+#let SMALL_FONT = 14pt
 #let principle_counter = counter("principle")
 #principle_counter.update(1)
 
@@ -77,8 +78,8 @@
   }
 }
 
-#let only-last-handout(..blocks, fig: false, handout: false, fig-num: 1) = {
-  if handout == true {
+#let only-last-handout(..blocks, fig: false, fig-num: 1) = {
+  if HANDOUT_MODE == true {
     blocks.at(-1)
   } else {
     let output = ()
@@ -134,7 +135,13 @@
   ),
 )
 
-#let sl(body, title: none, footer: true, inset: 0.5cm, fill: SECONDARY_COLOR) = {
+#let sl(
+  body,
+  title: none,
+  footer: true,
+  inset: 0.5cm,
+  fill: SECONDARY_COLOR,
+) = {
   let contents = [
     #if title != none [
       #titlefmt(title)
@@ -188,7 +195,9 @@
       ]
 
       #v(1fr)
-      #text(fill: PRIMARY_COLOR)[*Fergus Baker* <#link("fergus@cosroe.com")>\ Andy Young]
+      #text(
+        fill: PRIMARY_COLOR,
+      )[*Fergus Baker* <#link("fergus@cosroe.com")>\ Andy Young]
       #v(-0.2cm)
       #set text(size: 16pt)
       #v(-0.2cm)
@@ -218,13 +227,53 @@
     fill: PRIMARY_COLOR,
     size: size,
     weight: "black",
-    [#principle_counter.display("1.") #t],
+    [#t],
   )
   #v(-5pt)
 ]
 
-#sl(title: "Astrophysical Black Holes")[
+#sl[
+  #set text(font: SUBTITLE_FONT, size: 45pt)
+  #set par(leading: 20pt)
+  All stars are born.\
+  #uncover("2-")[All stars will #hl[die].]
+  #v(1cm)
+  #uncover("3-")[The death of a star is a spectacle.\ ]
+  #uncover("4-")[A star is reborn.]
+  #v(1cm)
+  #uncover("5-")[The pristine death is the #hl[black hole].]
+]
 
+#sl(title: "Astrophysical black holes")[
+  #hl[Gravitational collapse] of a neutron star with $M gt.tilde 3 M_(dot.circle)$
+  - #hl[Grow] through #hl[accretion]
+
+  #grid(
+      columns: (50%, 1fr),
+      [
+        #set align(center)
+      #image("assets/NGC4151_Galaxy_from_the_Mount_Lemmon_SkyCenter_Schulman_Telescope_courtesy_Adam_Block.jpg", width: 90%)
+  Active Galactic Nuclei (#hl[AGN])
+      ],
+      [
+
+        #set align(center)
+      #image("assets/Gaia_BH1_PanSTARRS.jpg", width: 90%)
+  Black hole X-ray binaries (#hl[BHXRB])
+      ]
+  )
+
+  #place(bottom+left, text(size: SMALL_FONT)[NGC4151 by #link("https://en.wikipedia.org/wiki/NGC_4151#/media/File:NGC4151_Galaxy_from_the_Mount_Lemmon_SkyCenter_Schulman_Telescope_courtesy_Adam_Block.jpg")[Adam Block/Mount Lemmon SkyCenter/\ University of Arizona], CC BY-SA 4.0])
+  #place(bottom+right, text(size: SMALL_FONT)[Gaia BH1 by #link("https://en.wikipedia.org/wiki/Gaia_BH1#/media/File:Gaia_BH1_PanSTARRS.jpg")[Meli thev], CC BY-SA 4.0])
+
+  // despite large difference in mass, the physics of the black hole in each is the same
+]
+
+#sl(title: "Accreting black holes")[
+  #v(0.5cm)
+  #image("assets/hercules-a.jpg")
+
+  #place(bottom + right, text(size: SMALL_FONT)[NGC2663, NASA CC])
 ]
 
 #sl(fill: PRIMARY_COLOR)[
@@ -234,7 +283,7 @@
   #quote[Spacetime is warped around black holes.]
 
   #set text(size: 60pt, weight: "regular")
-  But what does that even mean???
+  #uncover("2-")[But what _does that even mean_???]
 ]
 
 #sl[
@@ -243,7 +292,7 @@
 
   #align(center, image("assets/ss-great-britain.png", height: 12cm))
 
-  #subtitle("Galilean Relativity")
+  #uncover("2-")[#subtitle("1. Galilean Relativity")]
 
   // David Scott on the moon dropping hammer and feather "Well how bout that"
 ]
@@ -260,29 +309,29 @@
       #v(1cm)
       *Ole Rømer* (1676)
       - Studying the eclipses of Jupiter's moon Io.
-      #subtitle("The speed of light is finite.")
+      #subtitle("2. The speed of light is finite.")
       #v(15pt)
 
       *Isaac Newton* (1687)
       - Universal theory of gravity.
       - Balance kinetic energy with gravitational potential energy.
       #v(15pt)
-      #subtitle("Escape velocity.")
+      #subtitle("3. Escape velocity.")
       #v(15pt)
       #grid(
-          columns: (50%, 1fr),
-          [
-      $
-        Delta "KE" &= Delta "PE", \
-        (m v^2)/2  &= (G M m) / r, \
-        v_"esc" &=  sqrt((2 G M) / r).
-      $
-          ],
-          [
-            For *Earth*: #h(1fr) $v_"esc" = 11.2 "m" \/ "s"$ \
-            For the *Moon*: #h(1fr) $v_"esc" = 2.4 "m" \/ "s"$ \
-            On *Titan*: #h(1fr) $v_"esc" = 2.6 "m" \/ "s"$ \
-          ]
+        columns: (50%, 1fr),
+        [
+          $
+            Delta "KE" &= Delta "PE", \
+            (m v^2) / 2 &= (G M m) / r, \
+            v_"esc" &= sqrt((2 G M) / r).
+          $
+        ],
+        [
+          For *Earth*: #h(1fr) $v_"esc" = 11.2 "m" \/ "s"$ \
+          For the *Moon*: #h(1fr) $v_"esc" = 2.4 "m" \/ "s"$ \
+          On *Titan*: #h(1fr) $v_"esc" = 2.6 "m" \/ "s"$ \
+        ],
       )
     ],
     [
@@ -301,7 +350,7 @@
         left,
         text(
           font: SUBTITLE_FONT,
-          size: 68pt,
+          size: 50pt,
           weight: "black",
         )[A dark star],
       )
@@ -318,41 +367,62 @@
     inset: (left: 1cm, right: 1cm),
     quote[[...] a body falling from an infinite height towards it, would have acquired at its surface a greater velocity than that of light, and consequently supposing light to be attracted by the same force in proportion to its _vis inertiae_ with other bodies, #hl[all light emitted from such a body would be made to return towards it], by its own proper gravity.],
   )
-  #v(-0.5cm)
-  #align(center, image("assets/Cavendish_Experiment.png", height: 8.5cm))
+  #v(-0.3cm)
+  #align(center, image("assets/black-hole-sim.jpg", height: 8.5cm))
+  #place(
+    bottom + right,
+    block(text(size: SMALL_FONT, [Simulation, NASA CC BY 2.0])),
+  )
 ]
 
 #sl[
   #hl[James Clerk Maxwell] (1864): light does not obey Galilean relativity
 
-  #subtitle("The speed of light is constant in all frames.", size: 32pt)
-
-
+  #uncover("2-")[#subtitle(
+      "4. The speed of light is constant in all frames.",
+      size: 32pt,
+    )]
 
   #grid(
-      columns: (58%, 1fr),
-      column-gutter: 0.5cm,
-      [
-        Light travels in #hl[straight lines].
+    columns: (58%, 1fr),
+    column-gutter: 0.5cm,
+    [
+      #uncover("3-")[Light travels in #hl[straight lines].]
 
-        #hl[Albert Einstein] (1905): Special Theory of Relativity
+      #uncover("4-")[#hl[Albert Einstein] (1905): Special Theory of Relativity
         - Galilean relativity but with #hl[a constant speed of light]
-        // physics at high velocities behaves weirdly
-        // concept of The Event
-        // that when you move close to the speed of light, time slows down
-        // lengths contract
-
-        #v(2cm)
-        #subtitle("The equivalence principle.")
-
-        #v(1cm)
-        #hl[Acceleration] is the same as #hl[gravity].
-        - Fundamentally no way to distinguish the two scenarios.
-      ],
-      [
-        #set align(center)
-        #image("assets/left-handed-equivalence.svg", height: 16cm)
       ]
+      // physics at high velocities behaves weirdly
+      // concept of The Event
+      // that when you move close to the speed of light, time slows down
+      // lengths contract
+
+      #v(2cm)
+      #uncover("5-")[#subtitle("5. The equivalence principle.")]
+
+      #v(1cm)
+      #uncover("9-")[#hl[Acceleration] is the same as #hl[gravity].
+        - Fundamentally no way to distinguish the two scenarios.
+      ]
+    ],
+    [
+      #set align(center)
+      #animsvg(
+        read("assets/left-handed-equivalence.svg"),
+        (i, im) => only(i)[
+          #image.decode(im, height: 16cm)
+        ],
+        (hide: ("g4", "g9", "g2", "g3")),
+        (),
+        (),
+        (),
+        (),
+        (display: ("g4",)),
+        (display: ("g3",)),
+        (display: ("g9",)),
+        (display: ("g2",)),
+      )
+    ],
   )
 
   // Talk about the fact that you can't tell the difference between accelerating and gravity
@@ -361,57 +431,100 @@
   // - therefore light is travelling in straight lines
   // - it must therefore be space that is curved
 
+  #uncover("6-")[#place(
+      bottom + left,
+      text(size: SMALL_FONT)[LHG person, James Yeo],
+    )]
 ]
 
 #sl[
-  #image("assets/left-handed-throw.svg")
+  #animsvg(
+    read("assets/left-handed-throw.svg"),
+    (i, im) => only(i)[
+      #image.decode(im)
+    ],
+    (hide: ("g2", "g3", "g4", "g5", "g7")),
+    (display: ("g2",)),
+    (display: ("g3",)),
+    (display: ("g7", "g4")),
+    (display: ("g5",)),
+    (),
+    (),
+    (),
+    (),
+  )
 
-  #place(bottom + right, block(width: 15cm)[
+  #place(
+    bottom + right,
+    block(width: 15cm)[
       #set align(left)
-      Now we imagine the ball is a #hl[particle of light].
-      - Equivalence principle says this is the #hl[same as being in a gravitational field].
-      - But light is travelling in straight lines...
+      #uncover("6-")[Now we imagine the ball is a #hl[particle of light].
+
+        #uncover("7-")[
+          - Equivalence principle says this is the #hl[same as being in a gravitational field].
+          - But light is travelling in straight lines...
+        ]
+      ]
 
       #grid(
-          columns: (65%, 1fr),
-          [
+        columns: (65%, 1fr),
+        [
           #set align(top)
-          ... therefore it must be #hl[space that is curved]!
+          #uncover("8-")[... therefore it must be #hl[space that is curved]!]
 
-          - Light is deflected by gravity.
-          ],
-          [
-            #set align(center)
-            #image("assets/berty-onestones.jpg", width: 4cm)
-          ]
+          #uncover("9-")[- Light is #hl[deflected by gravity].]
+        ],
+        [
+          #set align(center)
+          #uncover("8-")[#image("assets/berty-onestones.jpg", width: 4cm)]
+        ],
       )
       #v(1cm)
 
-  ])
+    ],
+  )
+
+  // A is Goram
+  // B is Vincent
+]
+
+#sl[
+  #set align(horizon)
+  #set par(spacing: 20pt)
+  #hl(text(size: 50pt, "Einstein Ring"))
+
+  #align(
+    center,
+    image("assets/webb-spies-spiral-through-lens.jpg", height: 80%),
+  )
+  #align(right, text(size: 12pt)[JWST, ESO CC BY 4.0 2025])
+
 ]
 
 #sl[
   #hl[Albert Einstein] (again, now 1915): General Theory of Relativity
-  #subtitle("Spacetime curvature.")
+  #subtitle("6. Spacetime curvature.")
 
   #grid(
     columns: (50%, 1fr),
     row-gutter: 0.3cm,
     [
       #set align(center)
-      #animsvg(
-        read("assets/path-on-sphere.svg"),
-        (i, im) => only(i)[
-          #image.decode(im, height: 9cm)
-        ],
-        (hide: ("g44", "g41", "g42", "g43")),
-        (display: ("g41",)),
-        (display: ("g42",)),
-        (display: ("g43", "g44")),
-        (),
-        (),
-      )
-      #hl[Curvature] is a property of #hl[space and time] generated by #hl[matter and motion].
+      #uncover("2-")[#animsvg(
+          read("assets/path-on-sphere.svg"),
+          (i, im) => only(i)[
+            #image.decode(im, height: 9cm)
+          ],
+          (),
+          (hide: ("g44", "g41", "g42", "g43")),
+          (display: ("g41",)),
+          (display: ("g42",)),
+          (display: ("g43", "g44")),
+          (),
+          (),
+          (),
+        )]
+      #uncover("6-")[#hl[Curvature] is a property of #hl[space and time] generated by #hl[matter and motion].]
     ],
     [
       #set align(center)
@@ -421,56 +534,77 @@
         ... you might believe in a #hl[force driving you together].
       ]
     ],
+
     [
       #set align(horizon)
-      #align(center, image("assets/embedding-diagram.svg", height: 4.0cm))
+      #uncover("7-")[#align(
+          center,
+          image("assets/embedding-diagram.svg", height: 4.0cm),
+        )]
     ],
     [
       #set align(horizon)
-      #move(dx: 1.1cm, dy: -0.4cm, image("assets/curved-space.svg", height: 4.6cm))
-    ]
+      #uncover("8-")[#move(
+          dx: 1.1cm,
+          dy: -0.4cm,
+          image("assets/curved-space.svg", height: 4.6cm),
+        )]
+    ],
   )
 
   // motivating example about paths on a sphere
   // is this useful? YES! Your phones are taking into account relativistic effects to triangulate your position via GPS
 
-]
-
-#sl[
-  #set align(horizon)
-  #set par(spacing: 20pt)
-  #hl(text(size: 50pt, "Einstein Ring"))
-
-  #align(center, image("assets/webb-spies-spiral-through-lens.jpg", height: 80%))
-  #align(right, text(size: 12pt)[JWST, ESO CC BY 4.0 2025])
+  // Global Positioning System
+  // - apparent stars
 ]
 
 #sl(title: "Bridging the gap")[
-  #hl[Chandrasekhar] Neutron Stars \
+  #grid(
+      columns: (70%, 1fr),
+      [
   #hl[Jocelyn Bell Burnell] (1967): discovery of first radio pulsar. \
-  - Proves neutron stars exist
   #hl[John Wheeler] (1967): coins the term #hl[Black Hole] \
   #hl[Tom Bolton] (1972): discovers Cygnus X-1 orbits #hl[an invisible partner]. \
+  #v(0.5cm)
+  #align(
+    center,
+    text(
+      size: 30pt,
+      font: SUBTITLE_FONT,
+      [Black holes are the extreme of spacetime curvature.],
+    ),
+  )
+      ],
+      [
+        #image("assets/jocelyn-bell-burnell.jpg")
+      ]
+  )
 
-  #v(1cm)
   #align(center, line(length: 90%, stroke: PRIMARY_COLOR + 3pt))
-  #v(1cm)
 
   The language used to talk about curvature is #hl[Riemannian geometry]
   - Trajectory of all things follow #hl[geodesics]
   - #hl[Curvature] acts to impart a force, which we call #hl[gravity]
   - Curvature is mathematically represented by a #hl[metric]
-  #v(1cm)
-  #align(center, block[
-    #text[(Mass and momentum distribution)] $arrow.r.double g_(mu nu) = f(M(x), arrow(p)(x))$
-  ])
-  #v(1cm)
+  #v(0.5cm)
+  #align(
+    center,
+    block[
+      #text[(*Mass* and *momentum* distribution)] $arrow.r.double g_(mu nu) = f(M(x), arrow(p)(x))$
+    ],
+  )
+  #v(0.5cm)
   #hl[Hideously complex] for e.g. a star or a planet, potentially >1000s of parameters...
 ]
 
 #sl[
   #v(3cm)
-  #text(size: 30pt, font: SUBTITLE_FONT, [The #hl[Kerr family] of black hole solutions:])
+  #text(
+    size: 30pt,
+    font: SUBTITLE_FONT,
+    [The #hl[Kerr family] of black hole solutions:],
+  )
   #v(-3cm)
   #text(size: 120pt)[
     $ g_(mu nu) (#hl[$M$], #hl[$a$]) $
@@ -490,12 +624,350 @@
   ]
 ]
 
+#sl(footer: false, fill: PRIMARY_COLOR)[
+  #v(3cm)
+  #set text(
+    fill: SECONDARY_COLOR,
+    size: 80pt,
+    weight: "black",
+    font: SUBTITLE_FONT,
+  )
+  #set par(leading: 0pt, spacing: 0pt)
+  Visualising
+  #v(1.2cm)
+  #text(size: 130pt, fill: TEXT_COLOR)[black holes]
+]
+
 #sl[
   #set align(center)
   #v(2cm)
   #image("assets/luminet.png", width: 22cm)
 
   #hl[J-P. Luminet] (1978): Image of a spherical black hole with thin accretion disc
+]
+
+#sl(title: "(Relativistic) ray-tracing")[
+    #hl[Ray-tracing]: ubiquitous in modern computer graphics
+    - Each #hl[pixel is a photon].
+  #grid(
+    columns: (50%, 1fr),
+    column-gutter: 0.8cm,
+    [
+      #image("assets/utah-teapot.jpg")
+      #text(size: SMALL_FONT)[
+        Rendering by #link("https://commons.wikimedia.org/w/index.php?curid=4303243")[Dhatfield] - CC BY-SA 3.0,
+      ]
+    ],
+    [
+      #v(1cm)
+      #image("assets/teapot.png")
+    ],
+    [],
+    [
+      #hl[Relativistic ray-tracing]
+      - Exact same idea.
+      - Except light now follows curved paths.
+    ]
+  )
+]
+
+#sl(title: "Tracing geodesics")[
+  #grid(
+    columns: (40%, 1fr),
+    column-gutter: 0.5cm,
+    [
+      #uncover("2-")[
+        ```julia
+        using Gradus
+
+        # 1. Flat space
+        m = SphericalMetric()
+        # 2. Schwarzschild
+        m = KerrMetric(M = 1.0, a = 0.0)
+        # 3. Kerr
+        m = KerrMetric(M = 1.0, a = 1.0)
+
+        # spherical 4-vector
+        photon_origin = SVector(0, 1e4, π/2, 0)
+
+        # impact parameter space
+        α = collect(range(-10, 10, 20))
+        β = fill!(similar(α), 0)
+
+        vs = map_impact_parameters(
+          m, photon_origin, α, β
+        )
+
+        geods = tracegeodesics(
+          m,
+          fill(photon_origin, size(vs)),
+          vs,
+          # maximum integration time
+          2e4,
+        )
+        ```
+      ]
+    ],
+    [
+      #v(0.5cm)
+      #let offset = if HANDOUT_MODE { 0 } else { 2 };
+      #align(
+        center,
+        animsvg(
+          read("assets/gr-ray-tracing.svg"),
+          (i, im) => only(i + offset)[
+            #image.decode(im, width: 85%)
+          ],
+          (hide: ("g301",)),
+          (display: ("g301",)),
+          handout: HANDOUT_MODE,
+        ),
+      )
+
+      #uncover("4-")[Vertically #hl[stack slices] of different $beta$ to create an image.]
+      // be sure to explain the Event Horizon radius here
+    ],
+  )
+]
+
+#sl()[
+  #v(1cm)
+  #set align(center)
+  #image("assets/schwarzschild-shadow.png", height: 15cm)
+  (if this is about 2.8 meters across, it's 1:1 with the Schwarzschild radius of Jupiter)\
+  (if it's closer to 0.8 meters across, it's 1:1 with Schwarzschild radius of Saturn)
+]
+
+#sl(title: "Shadow of a black hole")[
+  #set align(center)
+  #image("assets/shadows.png")
+
+  #hl[The shadow] is a projection of the #hl[event horizon].
+]
+
+#sl(title: "Toy accretion disc")[
+  #let size = 17cm
+  #align(center, image("assets/toy-accretion.svg", width: size))
+  #uncover("2-")[#align(
+      center,
+      image("assets/toy-accretion-projected.svg", width: size),
+    )]
+  #uncover("3-")[#align(
+      center,
+      image("assets/toy-accretion-render.png", width: size),
+    )]
+]
+
+#sl(title: "Redshift")[
+  #uncover("2-")[Ratio of #hl[observer energy] to #hl[emitted energy].]
+
+  #v(1cm)
+
+  #uncover("3-")[Sources of redshift include: ]
+
+  #v(-0.3cm)
+
+  #grid(
+    columns: (50%, 1fr),
+    [
+    - #hl[Doppler shift]
+      #set align(center)
+      #image("assets/redshift.flat.png", width: 95%)
+    ],
+    [
+    - #hl[Gravitational redshift]
+      #set align(center)
+      #image("assets/redshift.schwarzschild.png", width: 95%)
+    ],
+  )
+
+
+  // - accretion disc is rotating at about 10% speed of light
+  // - how it's used to make a line profile
+]
+
+#sl()[
+  #set align(center)
+  #v(3cm)
+  #image("assets/our-luminet.png", width: 22cm)
+
+  #hl[After J-P. Luminet] (2025): Schwarzschild black hole
+]
+
+// #image("assets/building-line-profiles.svg", width: 100%)
+
+// #v(1cm)
+// The #hl[line profile] tells us how radiation from the disc #hl[is observed].
+
+#sl(footer: false, fill: PRIMARY_COLOR)[
+  #v(3cm)
+  #set text(
+    fill: SECONDARY_COLOR,
+    size: 80pt,
+    weight: "black",
+  )
+  #set par(leading: 0pt, spacing: 0pt)
+  _The_ #text(fill: TEXT_COLOR)[black hole]
+  #set text(font: SUBTITLE_FONT, size: 180pt)
+  corona
+]
+
+#sl(footer: false)[
+  #v(1cm)
+  #image("assets/corona-launching.jpg")
+
+  #place(bottom + right, text(size: SMALL_FONT)[Artist's rendition, NASA JPL Caltech CC])
+]
+
+#sl(title: "The black hole corona")[
+  #grid(
+    columns: (40%, 1fr),
+    [
+      Super-hot cloud of #hl[electrons]
+      - Illuminates the accretion disc in #hl[high-energy X-rays]
+    ],
+    [
+      #v(1fr)
+      #align(right)[The #hl[Lamppost] model]
+      #only-last-handout(
+        image("assets/literal-lamppost.png", width: 95%),
+        image("assets/literal-lamppost-magnifying.png", width: 95%),
+        image("assets/literal-lamppost-magnifying.png", width: 95%),
+      )
+    ],
+  )
+]
+
+#sl(title: "Reverberation lags")[
+  #set align(center)
+  #align(center)[
+    #animsvg(
+      read("assets/reverberation-traces.svg"),
+      (i, im) => only(i)[
+        #image.decode(im, width: 90%)
+      ],
+      (),
+      (hide: ("g75", "g49")),
+      (hide: ("g1",)),
+      (display: ("g5",)),
+      (hide: ("g6", "g2"), display: ("g7",)),
+      (display: ("g73", "g72", "g4")),
+      (display: ("path63", "g3")),
+    )
+  ]
+]
+
+#sl(title: "Illuminating the disc")[
+  #align(
+    center,
+    animsvg(
+      read("assets/lamp-post-traces.svg"),
+      (i, im) => only(i)[
+        #image.decode(im, height: 50%)
+      ],
+      (hide: ("g572", "g570", "g571")),
+      (display: ("g570",)),
+      (display: ("g571",), hide: ("g570",)),
+      (display: ("g572",), hide: ("g571",)),
+      handout: HANDOUT_MODE,
+    ),
+  )
+
+  #align(
+    center,
+    animsvg(
+      read("assets/lamp-post-emissivity-travel-time.svg"),
+      (i, im) => only(i)[
+        #image.decode(im, height: 45%)
+      ],
+      (hide: ("g389", "g390", "g391")),
+      (display: ("g391",)),
+      (display: ("g390",)),
+      (display: ("g389",)),
+      handout: HANDOUT_MODE,
+    ),
+  )
+]
+
+#sl(title: "Transfer functions")[
+  Trace #hl[observer to disc] and bin by #hl[redshift] $g$ and #hl[total arrival time]:
+  $ t_"tot" = t_("corona" -> "disc") + t_("disc" -> "observer") $
+
+  #v(1cm)
+  #grid(
+    columns: (33%, 33%, 1fr),
+    column-gutter: 0pt,
+    [
+      #image("./assets/apparent-image.png", width: 100%)
+    ],
+    [
+      #image("./assets/apparent-image-arrival.png", width: 100%)
+    ],
+    [
+      #move(dx: -0.5em, image("./assets/apparent-image-transfer.png", width: 94%))
+    ],
+  )
+]
+
+#sl(title: "Beyond the lamppost model")[
+  #v(1cm)
+  #align(center, image("assets/coronal-illustration.svg", width: 22cm))
+
+  // extended coronae is the problem i've been working on for about a year with
+  // the software i've been developing over the last 4 years
+  // - we can do thick discs fast enough to fit them
+  // - we can do radially extended coronae fast enough too
+]
+
+// #if HANDOUT_MODE  == false [
+  #sl(footer: false, fill: TEXT_COLOR)[
+    #align(center, image("assets/xmm-ngc-4151.png", width: 100%))
+
+    #place(center + horizon)[
+      #uncover("2-")[#image("assets/eht-m87-image.jpg")]
+    ]
+  ]
+// ]
+
+#sl(title: "Open Problems")[
+  What is the shape of the corona?
+
+  What is the nature of the accretion disc?
+
+  Where are the intermediary mass black holes?
+
+  What happens inside a black hole?
+]
+
+#slide[
+  #show link: l => text(fill: blue.lighten(40%), l)
+  #set page(fill: PRIMARY_COLOR, footer: none)
+  #set text(fill: SECONDARY_COLOR)
+  #v(0.5cm)
+  #par(spacing: 0pt, text(size: 105pt, weight: "bold")[Summary])
+
+  #v(0.5cm)
+
+
+  #par(spacing: 20pt, text(size: 30pt)[*Thank you! \<3*])
+
+  #set align(right)
+  #v(1fr)
+  *Contact:* #link("fergus@cosroe.com") \
+  #link("https://github.com/fjebaker") \
+  #link("www.cosroe.com") \
+  #set text(size: 15pt)
+  \
+  Figures rendered using Makie.jl and GNUPlot.\
+  Fonts: Empyrean, Inter, Vollkorn (OFL).\
+  Slides made with Typst.
+]
+
+#sl(footer: false)[
+  #set align(center)
+  #set align(horizon)
+
+  Backup Slides
 ]
 
 // Plan
@@ -529,3 +1001,26 @@
 //    - One particular effect
 //    - Models of accretion physics
 //    - Lamp post model and
+
+#sl(title: "Measuring parameters")[
+
+  #grid(
+    columns: (50%, 1fr),
+    [
+      #set align(center)
+      #image("assets/line-profiles.svg", height: 100%)
+    ],
+    [
+      #hl[Lineprofile] is sensitive to the parameters of the #hl[black hole].
+      - Used to measure the #hl[spin] and relative #hl[inclination]
+
+        #v(1cm)
+        #align(center, image("assets/young-05.png", width: 100%))
+        #align(
+          center,
+          text(size: SMALL_FONT, [MCG 6-30-15 from Young et al. (2005)]),
+        )
+    ],
+  )
+]
+
