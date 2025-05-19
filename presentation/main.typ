@@ -235,7 +235,7 @@
 #sl[
   #set text(font: SUBTITLE_FONT, size: 45pt)
   #set par(leading: 20pt)
-  All stars are born.\
+  All stars are #hl[born].\
   #uncover("2-")[All stars will #hl[die].]
   #v(1cm)
   #uncover("3-")[The death of a star is a spectacle.\ ]
@@ -245,26 +245,36 @@
 ]
 
 #sl(title: "Astrophysical black holes")[
-  #hl[Gravitational collapse] of a neutron star with $M gt.tilde 3 M_(dot.circle)$
-  - #hl[Grow] through #hl[accretion]
-
   #grid(
-      columns: (50%, 1fr),
-      [
-        #set align(center)
-      #image("assets/NGC4151_Galaxy_from_the_Mount_Lemmon_SkyCenter_Schulman_Telescope_courtesy_Adam_Block.jpg", width: 90%)
-  Active Galactic Nuclei (#hl[AGN])
-      ],
-      [
+    columns: (50%, 1fr),
+    [
+      #set align(center)
+      #image(
+        "assets/NGC4151_Galaxy_from_the_Mount_Lemmon_SkyCenter_Schulman_Telescope_courtesy_Adam_Block.jpg",
+        width: 90%,
+      )
+      Active Galactic Nuclei (#hl[AGN])
+    ],
+    [
 
-        #set align(center)
+      #set align(center)
       #image("assets/Gaia_BH1_PanSTARRS.jpg", width: 90%)
-  Black hole X-ray binaries (#hl[BHXRB])
-      ]
+      Black hole X-ray binaries (#hl[BHXRB])
+    ],
   )
 
-  #place(bottom+left, text(size: SMALL_FONT)[NGC4151 by #link("https://en.wikipedia.org/wiki/NGC_4151#/media/File:NGC4151_Galaxy_from_the_Mount_Lemmon_SkyCenter_Schulman_Telescope_courtesy_Adam_Block.jpg")[Adam Block/Mount Lemmon SkyCenter/\ University of Arizona], CC BY-SA 4.0])
-  #place(bottom+right, text(size: SMALL_FONT)[Gaia BH1 by #link("https://en.wikipedia.org/wiki/Gaia_BH1#/media/File:Gaia_BH1_PanSTARRS.jpg")[Meli thev], CC BY-SA 4.0])
+  #place(
+    bottom + left,
+    text(
+      size: SMALL_FONT,
+    )[NGC4151 by #link("https://en.wikipedia.org/wiki/NGC_4151#/media/File:NGC4151_Galaxy_from_the_Mount_Lemmon_SkyCenter_Schulman_Telescope_courtesy_Adam_Block.jpg")[Adam Block/Mount Lemmon SkyCenter/\ University of Arizona], CC BY-SA 4.0],
+  )
+  #place(
+    bottom + right,
+    text(
+      size: SMALL_FONT,
+    )[Gaia BH1 by #link("https://en.wikipedia.org/wiki/Gaia_BH1#/media/File:Gaia_BH1_PanSTARRS.jpg")[Meli thev], CC BY-SA 4.0],
+  )
 
   // despite large difference in mass, the physics of the black hole in each is the same
 ]
@@ -280,7 +290,7 @@
   #v(3cm)
   #set text(size: 70pt, weight: "bold", fill: SECONDARY_COLOR)
   #set align(center)
-  #quote[Spacetime is warped around black holes.]
+  #quote[Spacetime is curved around black holes.]
 
   #set text(size: 60pt, weight: "regular")
   #uncover("2-")[But what _does that even mean_???]
@@ -309,35 +319,39 @@
       #v(1cm)
       *Ole Rømer* (1676)
       - Studying the eclipses of Jupiter's moon Io.
-      #subtitle("2. The speed of light is finite.")
+      #uncover("3-")[#subtitle("2. The speed of light is finite.")]
       #v(15pt)
 
-      *Isaac Newton* (1687)
-      - Universal theory of gravity.
-      - Balance kinetic energy with gravitational potential energy.
+      #uncover("4-")[*Isaac Newton* (1687)]
+      #uncover("5-")[
+        - Universal theory of gravity.
+        - Balance kinetic energy with gravitational potential energy.
+      ]
       #v(15pt)
-      #subtitle("3. Escape velocity.")
+      #uncover("6-")[#subtitle("3. Escape velocity.")]
       #v(15pt)
       #grid(
         columns: (50%, 1fr),
         [
-          $
-            Delta "KE" &= Delta "PE", \
-            (m v^2) / 2 &= (G M m) / r, \
-            v_"esc" &= sqrt((2 G M) / r).
-          $
+          #uncover("7-")[$
+              Delta "KE" &= Delta "PE", \
+              (m v^2) / 2 &= (G M m) / r, \
+              v_"esc" &= sqrt((2 G M) / r).
+            $
+          ]
         ],
         [
-          For *Earth*: #h(1fr) $v_"esc" = 11.2 "m" \/ "s"$ \
-          For the *Moon*: #h(1fr) $v_"esc" = 2.4 "m" \/ "s"$ \
-          On *Titan*: #h(1fr) $v_"esc" = 2.6 "m" \/ "s"$ \
+          #uncover("8-")[For *Earth*: #h(1fr) $v_"esc" = 11.2 "m" \/ "s"$ \
+            For the *Moon*: #h(1fr) $v_"esc" = 2.4 "m" \/ "s"$ \
+            On *Titan*: #h(1fr) $v_"esc" = 2.6 "m" \/ "s"$ \
+          ]
         ],
       )
     ],
     [
       #set align(center)
       #v(1cm)
-      #image("assets/romer-speed-of-light.svg", height: 13cm)
+      #uncover("2-")[#image("assets/romer-speed-of-light.svg", height: 13cm)]
     ],
   )
 ]
@@ -345,7 +359,7 @@
 #sl[
   #[
     #set par(spacing: 0pt, justify: true)
-    #uncover("2-")[
+    #uncover("3-")[
       #align(
         left,
         text(
@@ -363,16 +377,19 @@
     v_"esc" &=  sqrt((2 G M) / r) #text(fill: PRIMARY_COLOR)[$= c$] #h(3cm) arrow.r.double r &= (2 G M) / c^2.
   $
 
-  #block(
-    inset: (left: 1cm, right: 1cm),
-    quote[[...] a body falling from an infinite height towards it, would have acquired at its surface a greater velocity than that of light, and consequently supposing light to be attracted by the same force in proportion to its _vis inertiae_ with other bodies, #hl[all light emitted from such a body would be made to return towards it], by its own proper gravity.],
-  )
-  #v(-0.3cm)
-  #align(center, image("assets/black-hole-sim.jpg", height: 8.5cm))
-  #place(
-    bottom + right,
-    block(text(size: SMALL_FONT, [Simulation, NASA CC BY 2.0])),
-  )
+  #uncover("2-")[#block(
+      inset: (left: 1cm, right: 1cm),
+      quote[[...] a body falling from an infinite height towards it, would have acquired at its surface a greater velocity than that of light, and consequently supposing light to be attracted by the same force in proportion to its _vis inertiae_ with other bodies, #hl[all light emitted from such a body would be made to return towards it], by its own proper gravity.],
+    )
+  ]
+  #uncover("3-")[
+    #v(-0.3cm)
+    #align(center, image("assets/black-hole-sim.jpg", height: 8.5cm))
+    #place(
+      bottom + right,
+      block(text(size: SMALL_FONT, [Simulation, NASA CC BY 2.0])),
+    )
+  ]
 ]
 
 #sl[
@@ -449,7 +466,7 @@
     (display: ("g7", "g4")),
     (display: ("g5",)),
     (),
-    (),
+    (display: ("g8",), hide: ("g4", "g7",)),
     (),
     (),
   )
@@ -561,41 +578,44 @@
 
 #sl(title: "Bridging the gap")[
   #grid(
-      columns: (70%, 1fr),
-      [
-  #hl[Jocelyn Bell Burnell] (1967): discovery of first radio pulsar. \
-  #hl[John Wheeler] (1967): coins the term #hl[Black Hole] \
-  #hl[Tom Bolton] (1972): discovers Cygnus X-1 orbits #hl[an invisible partner]. \
-  #v(0.5cm)
-  #align(
-    center,
-    text(
-      size: 30pt,
-      font: SUBTITLE_FONT,
-      [Black holes are the extreme of spacetime curvature.],
-    ),
-  )
-      ],
-      [
-        #image("assets/jocelyn-bell-burnell.jpg")
-      ]
+    columns: (70%, 1fr),
+    [
+      #hl[Jocelyn Bell Burnell] (1967): discovery of first radio pulsar. \
+      #uncover("2-")[ #hl[John Wheeler] (1967): coins the term #hl[Black Hole]]\
+      #uncover("3-")[#hl[Tom Bolton] (1972): discovers Cygnus X-1 orbits #hl[an invisible partner].]
+      #v(0.5cm)
+      #uncover("4-")[#align(
+        center,
+        text(
+          size: 30pt,
+          font: SUBTITLE_FONT,
+          [Black holes are the extreme of spacetime curvature.],
+        ),
+      )
+    ]
+    ],
+    [
+      #image("assets/jocelyn-bell-burnell.jpg")
+    ],
   )
 
-  #align(center, line(length: 90%, stroke: PRIMARY_COLOR + 3pt))
+  #uncover("5-")[#align(center, line(length: 90%, stroke: PRIMARY_COLOR + 3pt))]
 
-  The language used to talk about curvature is #hl[Riemannian geometry]
+  #uncover("6-")[The language used to talk about curvature is #hl[Riemannian geometry]
   - Trajectory of all things follow #hl[geodesics]
   - #hl[Curvature] acts to impart a force, which we call #hl[gravity]
   - Curvature is mathematically represented by a #hl[metric]
+]
   #v(0.5cm)
-  #align(
+  #uncover("7-")[#align(
     center,
     block[
       #text[(*Mass* and *momentum* distribution)] $arrow.r.double g_(mu nu) = f(M(x), arrow(p)(x))$
     ],
   )
+]
   #v(0.5cm)
-  #hl[Hideously complex] for e.g. a star or a planet, potentially >1000s of parameters...
+  #uncover("8-")[#hl[Hideously complex] for e.g. a star or a planet, potentially >1000s of parameters...]
 ]
 
 #sl[
@@ -647,8 +667,8 @@
 ]
 
 #sl(title: "(Relativistic) ray-tracing")[
-    #hl[Ray-tracing]: ubiquitous in modern computer graphics
-    - Each #hl[pixel is a photon].
+  #hl[Ray-tracing]: ubiquitous in modern computer graphics
+  - Each #hl[pixel is a photon].
   #grid(
     columns: (50%, 1fr),
     column-gutter: 0.8cm,
@@ -660,74 +680,35 @@
     ],
     [
       #v(1cm)
-      #image("assets/teapot.png")
+      #uncover("2-")[#image("assets/teapot.png")]
     ],
+
     [],
     [
-      #hl[Relativistic ray-tracing]
+      #uncover("2-")[#hl[Relativistic ray-tracing]
       - Exact same idea.
       - Except light now follows curved paths.
     ]
+    ],
   )
 ]
 
 #sl(title: "Tracing geodesics")[
-  #grid(
-    columns: (40%, 1fr),
-    column-gutter: 0.5cm,
-    [
-      #uncover("2-")[
-        ```julia
-        using Gradus
-
-        # 1. Flat space
-        m = SphericalMetric()
-        # 2. Schwarzschild
-        m = KerrMetric(M = 1.0, a = 0.0)
-        # 3. Kerr
-        m = KerrMetric(M = 1.0, a = 1.0)
-
-        # spherical 4-vector
-        photon_origin = SVector(0, 1e4, π/2, 0)
-
-        # impact parameter space
-        α = collect(range(-10, 10, 20))
-        β = fill!(similar(α), 0)
-
-        vs = map_impact_parameters(
-          m, photon_origin, α, β
-        )
-
-        geods = tracegeodesics(
-          m,
-          fill(photon_origin, size(vs)),
-          vs,
-          # maximum integration time
-          2e4,
-        )
-        ```
-      ]
-    ],
-    [
       #v(0.5cm)
-      #let offset = if HANDOUT_MODE { 0 } else { 2 };
       #align(
         center,
         animsvg(
           read("assets/gr-ray-tracing.svg"),
-          (i, im) => only(i + offset)[
-            #image.decode(im, width: 85%)
+          (i, im) => only(i)[
+            #image.decode(im, height: 85%)
           ],
           (hide: ("g301",)),
           (display: ("g301",)),
-          handout: HANDOUT_MODE,
         ),
       )
 
-      #uncover("4-")[Vertically #hl[stack slices] of different $beta$ to create an image.]
+      #uncover("2-")[Vertically #hl[stack slices] of different $beta$ to create an image.]
       // be sure to explain the Event Horizon radius here
-    ],
-  )
 ]
 
 #sl()[
@@ -759,29 +740,31 @@
 ]
 
 #sl(title: "Redshift")[
-  #uncover("2-")[Ratio of #hl[observer energy] to #hl[emitted energy].]
+  Ratio of #hl[observer energy] to #hl[emitted energy].
 
-  #v(1cm)
-
-  #uncover("3-")[Sources of redshift include: ]
+  #uncover("2-")[Sources of redshift include: ]
 
   #v(-0.3cm)
 
   #grid(
     columns: (50%, 1fr),
     [
-    - #hl[Doppler shift]
-      #set align(center)
-      #image("assets/redshift.flat.png", width: 95%)
+        #set align(center)
+      #uncover("3-")[- #hl[Doppler shift]
+        #image("assets/redshift.flat.png", width: 95%)
+      ]
+
+      #uncover("4-")[
+        #image("assets/whirly-tube.jpg", height: 4cm)
+      ]
     ],
     [
-    - #hl[Gravitational redshift]
-      #set align(center)
-      #image("assets/redshift.schwarzschild.png", width: 95%)
+      #uncover("5-")[- #hl[Gravitational redshift]
+        #set align(center)
+        #image("assets/redshift.schwarzschild.png", width: 95%)
+        ]
     ],
   )
-
-
   // - accretion disc is rotating at about 10% speed of light
   // - how it's used to make a line profile
 ]
@@ -792,6 +775,12 @@
   #image("assets/our-luminet.png", width: 22cm)
 
   #hl[After J-P. Luminet] (2025): Schwarzschild black hole
+]
+
+#sl(title: "Observers")[
+  The #hl[inclination] of the observer changes the #hl[redshift profile]:
+  #v(1cm)
+  #align(center, image("assets/redshift-observer.png", height: 12cm))
 ]
 
 // #image("assets/building-line-profiles.svg", width: 100%)
@@ -816,20 +805,35 @@
   #v(1cm)
   #image("assets/corona-launching.jpg")
 
-  #place(bottom + right, text(size: SMALL_FONT)[Artist's rendition, NASA JPL Caltech CC])
+  #place(
+    bottom + right,
+    text(size: SMALL_FONT)[Artist's rendition, NASA JPL Caltech CC],
+  )
 ]
 
 #sl(title: "The black hole corona")[
   #grid(
-    columns: (40%, 1fr),
+    columns: (42%, 1fr),
+    column-gutter: 0.5cm,
     [
-      Super-hot cloud of #hl[electrons]
-      - Illuminates the accretion disc in #hl[high-energy X-rays]
+      Observations have two key components:
+      - A black-body component (#hl[disc])
+      - A high-energy additional component (#hl[the corona])
+
+      #uncover("2-")[Super-hot cloud of #hl[electrons]
+        - Illuminates the accretion disc in #hl[high-energy X-rays]
+      ]
+
+      #v(2cm)
+      #uncover("3-")[When we observe with our telescopes we see the #hl[ensemble].]
+      #v(2cm)
+      #uncover("4-")[#cbox[Components can be *modelled independently*.]]
     ],
     [
       #v(1fr)
       #align(right)[The #hl[Lamppost] model]
       #only-last-handout(
+        image("assets/literal-lamppost.png", width: 95%),
         image("assets/literal-lamppost.png", width: 95%),
         image("assets/literal-lamppost-magnifying.png", width: 95%),
         image("assets/literal-lamppost-magnifying.png", width: 95%),
@@ -857,87 +861,47 @@
   ]
 ]
 
-#sl(title: "Illuminating the disc")[
-  #align(
-    center,
-    animsvg(
-      read("assets/lamp-post-traces.svg"),
-      (i, im) => only(i)[
-        #image.decode(im, height: 50%)
-      ],
-      (hide: ("g572", "g570", "g571")),
-      (display: ("g570",)),
-      (display: ("g571",), hide: ("g570",)),
-      (display: ("g572",), hide: ("g571",)),
-      handout: HANDOUT_MODE,
-    ),
-  )
-
-  #align(
-    center,
-    animsvg(
-      read("assets/lamp-post-emissivity-travel-time.svg"),
-      (i, im) => only(i)[
-        #image.decode(im, height: 45%)
-      ],
-      (hide: ("g389", "g390", "g391")),
-      (display: ("g391",)),
-      (display: ("g390",)),
-      (display: ("g389",)),
-      handout: HANDOUT_MODE,
-    ),
-  )
-]
-
-#sl(title: "Transfer functions")[
-  Trace #hl[observer to disc] and bin by #hl[redshift] $g$ and #hl[total arrival time]:
-  $ t_"tot" = t_("corona" -> "disc") + t_("disc" -> "observer") $
-
-  #v(1cm)
+#sl(title: "Weighing black holes")[
+  Use #hl[reverberation lag] to measure mass:
   #grid(
-    columns: (33%, 33%, 1fr),
-    column-gutter: 0pt,
+    columns: (50%, 1fr),
     [
-      #image("./assets/apparent-image.png", width: 100%)
+      #set align(center)
+      #image("assets/o-neill-2025-cyg-x-1-mass.png", height: 9cm)
+      #v(-0.5cm)
+      #text(size: 15pt)[O'Neill et al., 2025]
+      #v(-0.5cm)
     ],
     [
-      #image("./assets/apparent-image-arrival.png", width: 100%)
-    ],
-    [
-      #move(dx: -0.5em, image("./assets/apparent-image-transfer.png", width: 94%))
+      #set align(center)
+      #image(
+        "assets/iron-k-vs-black-hole-mass-kara-et-al-2016.png",
+        height: 9cm,
+      )
+      #v(-0.5cm)
+      #text(size: 15pt)[Kara et al., 2016]
+      #v(-0.5cm)
     ],
   )
-]
 
-#sl(title: "Beyond the lamppost model")[
-  #v(1cm)
-  #align(center, image("assets/coronal-illustration.svg", width: 22cm))
-
-  // extended coronae is the problem i've been working on for about a year with
-  // the software i've been developing over the last 4 years
-  // - we can do thick discs fast enough to fit them
-  // - we can do radially extended coronae fast enough too
+  #v(2cm)
+  #align(
+    center,
+    block[
+      #hl[Accreting black holes] are highly #hl[variable], and we try to model that variability to #hl[infer parameters] of the black hole.
+    ],
+  )
 ]
 
 // #if HANDOUT_MODE  == false [
-  #sl(footer: false, fill: TEXT_COLOR)[
-    #align(center, image("assets/xmm-ngc-4151.png", width: 100%))
+#sl(footer: false, fill: TEXT_COLOR)[
+  #align(center, image("assets/xmm-ngc-4151.png", width: 100%))
 
-    #place(center + horizon)[
-      #uncover("2-")[#image("assets/eht-m87-image.jpg")]
-    ]
+  #place(center + horizon)[
+    #uncover("2-")[#image("assets/eht-m87-image.jpg")]
   ]
-// ]
-
-#sl(title: "Open Problems")[
-  What is the shape of the corona?
-
-  What is the nature of the accretion disc?
-
-  Where are the intermediary mass black holes?
-
-  What happens inside a black hole?
 ]
+// ]
 
 #slide[
   #show link: l => text(fill: blue.lighten(40%), l)
@@ -946,21 +910,31 @@
   #v(0.5cm)
   #par(spacing: 0pt, text(size: 105pt, weight: "bold")[Summary])
 
+  Spacetime is curved around black holes.
+  - Leads to distortion of light
+
+  *Open problems:*
+  - What is the *geometry of the corona*?
+  - We see AGN and XRB, but Where are the *intermediary mass black holes*?
+  - What happens *inside a black hole*?
+
   #v(0.5cm)
 
 
-  #par(spacing: 20pt, text(size: 30pt)[*Thank you! \<3*])
-
   #set align(right)
   #v(1fr)
+  *Slides:*\
+  #link("https://github.com/fjebaker/pint-of-sci-25") \
   *Contact:* #link("fergus@cosroe.com") \
   #link("https://github.com/fjebaker") \
   #link("www.cosroe.com") \
   #set text(size: 15pt)
   \
   Figures rendered using Makie.jl and GNUPlot.\
-  Fonts: Empyrean, Inter, Vollkorn (OFL).\
+  Fonts: Atkinson Hyperlegible, Adelphe Germinal (OFL).\
   Slides made with Typst.
+
+  #place(bottom+left, image("assets/cat-meme.jpg", height: 10cm))
 ]
 
 #sl(footer: false)[
@@ -1022,5 +996,119 @@
         )
     ],
   )
+]
+
+#sl(title: "Aside: photon ring")[
+  #grid(
+    columns: (68%, 1fr),
+    column-gutter: 20pt,
+    [
+      #hl[Winding] of geodesics around the black hole:
+      #{
+        set text(size: 15pt)
+        grid(
+          columns: (55%, 1fr),
+          [
+            #v(1cm)
+            #image(
+              "./assets/photon-ring-schwarzschild.svg",
+              width: 100%,
+            )
+          ],
+          [
+            #v(2.0em)
+            #image("./assets/eht-m87-image.jpg", width: 90%)
+            #text(
+              size: 14pt,
+            )[M87\*, imaged by the #hl[Event Horizon Telescope] CC BY 4.0]
+            #v(1em)
+          ],
+        )
+      }
+      Bright central ring in EHT images is the #hl[photon ring].
+    ],
+    [
+      #set text(size: 15pt)
+      #set align(center)
+      #move(
+        dy: -1pt,
+        image("./assets/m-von-laue-1921.png", width: 90%),
+      )
+      #v(-11pt)
+      #text(size: 18pt, [M. von Laue, 1921])
+      #v(-5pt)
+      #move(
+        dx: -15pt,
+        image("./assets/photon-ring-paths.svg", width: 100%),
+      )
+      #v(-20pt)
+      #text(size: 18pt, [After M. von Laue, 2025])
+    ],
+  )
+]
+
+
+#sl(title: "Observing lags")[
+  // TODO: redo this slide
+  Trace #hl[observer to disc] and bin by #hl[redshift] $g$ and #hl[total arrival time]:
+  $ t_"tot" = t_("corona" -> "disc") + t_("disc" -> "observer") $
+
+  #v(1cm)
+  #grid(
+    columns: (33%, 33%, 1fr),
+    column-gutter: 0pt,
+    [
+      #image("./assets/apparent-image.png", width: 100%)
+    ],
+    [
+      #image("./assets/apparent-image-arrival.png", width: 100%)
+    ],
+    [
+      #move(
+        dx: -0.5em,
+        image("./assets/apparent-image-transfer.png", width: 94%),
+      )
+    ],
+  )
+]
+
+#sl(title: "Illuminating the disc")[
+  #align(
+    center,
+    animsvg(
+      read("assets/lamp-post-traces.svg"),
+      (i, im) => only(i)[
+        #image.decode(im, height: 50%)
+      ],
+      (hide: ("g572", "g570", "g571")),
+      (display: ("g570",)),
+      (display: ("g571",), hide: ("g570",)),
+      (display: ("g572",), hide: ("g571",)),
+    ),
+  )
+
+  #align(
+    center,
+    animsvg(
+      read("assets/lamp-post-emissivity-travel-time.svg"),
+      (i, im) => only(i)[
+        #image.decode(im, height: 45%)
+      ],
+      (hide: ("g389", "g390", "g391")),
+      (display: ("g391",)),
+      (display: ("g390",)),
+      (display: ("g389",)),
+    ),
+  )
+]
+
+#sl(title: "Beyond the lamppost model")[
+  #v(1cm)
+  #align(center, image("assets/coronal-illustration.svg", width: 22cm))
+
+  // extended coronae is the problem i've been working on for about a year with
+  // the software i've been developing over the last 4 years
+  // - we can do thick discs fast enough to fit them
+  // - we can do radially extended coronae fast enough too
 ]
 
